@@ -49,7 +49,7 @@ h1 { margin: 0; font-size: 32px; font-weight: 700; }
 }
 .section-title { margin-top: 0; margin-bottom: 16px; font-size: 18px; color: var(--accent); }
 
-/* 原生折疊選單設計 (編輯模式用) */
+/* 原生折疊選單設計 */
 .accordion-card {
     background-color: var(--card-bg);
     border-radius: 10px; margin-bottom: 12px;
@@ -85,7 +85,7 @@ input {
 }
 input:focus { outline: none; }
 
-/* 檢視模式清單 (iOS 設定風格) */
+/* 檢視模式清單 */
 .list-view { padding: 0; overflow: hidden; }
 .list-group { border-bottom: 8px solid #000; }
 .list-group:last-child { border-bottom: none; }
@@ -129,13 +129,21 @@ input:focus { outline: none; }
 .history-section h4 { margin: 0 0 12px 0; color: var(--text-muted); font-size: 15px; }
 .history-card {
     background-color: #000; border: 1px solid var(--border-color);
-    padding: 12px; border-radius: 8px; margin-bottom: 10px; font-size: 14px;
+    padding: 12px; border-radius: 8px; margin-bottom: 10px; font-size: 14px; position: relative;
 }
-.history-card .data-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.history-card .data-row { display: flex; justify-content: space-between; margin-bottom: 4px; align-items: center; }
 .history-card .highlight {
     color: var(--accent); font-size: 16px; font-weight: bold;
     margin-top: 8px; border-top: 1px dashed var(--border-color); padding-top: 8px;
 }
+
+/* 油耗修正按鈕 */
+.edit-fuel-btn {
+    background-color: #333; color: #fff; border: none;
+    padding: 4px 10px; border-radius: 4px; font-size: 12px;
+    cursor: pointer;
+}
+
 .susp-title {
     color: var(--accent-blue); font-weight: bold; font-size: 16px;
     border-bottom: 1px dashed var(--border-color); padding-bottom: 6px; margin-bottom: 8px;
