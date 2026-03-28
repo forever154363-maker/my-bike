@@ -12,7 +12,6 @@
     </header>
 
     <div class="container">
-        
         <section class="photo-card">
             <img src="car-image.jpg" alt="車輛封面照" id="cover-photo" onerror="this.src='https://via.placeholder.com/800x450/1c1c1e/8e8e93?text=請放入+car-image.jpg'">
         </section>
@@ -49,14 +48,25 @@
                 <div class="list-item"><span>前土除</span><span id="val-ext-f-fender" class="val">-</span></div>
                 <div class="list-item"><span>後土除</span><span id="val-ext-r-fender" class="val">-</span></div>
                 <div class="list-item"><span>內後土除</span><span id="val-ext-in-fender" class="val">-</span></div>
+                <div id="val-custom-ext-list"></div>
             </div>
 
             <div class="list-group">
                 <h3>3. 輪胎與輪框系統</h3>
                 <div class="list-item"><span>前輪胎</span><span id="val-tire-f" class="val">-</span></div>
+                <div class="list-item"><span style="color: #8e8e93; font-size:14px;">前胎壓/胎溫</span><span id="val-tire-f-pt" class="val">-</span></div>
                 <div class="list-item"><span>後輪胎</span><span id="val-tire-r" class="val">-</span></div>
+                <div class="list-item"><span style="color: #8e8e93; font-size:14px;">後胎壓/胎溫</span><span id="val-tire-r-pt" class="val">-</span></div>
                 <div class="list-item"><span>前輪框</span><span id="val-wheel-f" class="val">-</span></div>
                 <div class="list-item"><span>後輪框</span><span id="val-wheel-r" class="val">-</span></div>
+            </div>
+
+            <div class="list-group">
+                <h3>4. 懸吊與阻尼系統 (廠牌型號)</h3>
+                <div class="list-item"><span>前避震器</span><span id="val-susp-f-brand" class="val">-</span></div>
+                <div class="list-item"><span>後避震器</span><span id="val-susp-r-brand" class="val">-</span></div>
+                <div class="list-item"><span>前質量阻尼器</span><span id="val-damper-f-brand" class="val">-</span></div>
+                <div class="list-item"><span>後質量阻尼器</span><span id="val-damper-r-brand" class="val">-</span></div>
             </div>
         </div>
 
@@ -92,16 +102,31 @@
                     <div class="input-group"><label>前土除</label><input type="text" id="ext-f-fender" placeholder="記錄廠牌款式"></div>
                     <div class="input-group"><label>後土除</label><input type="text" id="ext-r-fender" placeholder="記錄廠牌款式"></div>
                     <div class="input-group"><label>內後土除</label><input type="text" id="ext-in-fender" placeholder="記錄廠牌款式"></div>
+                    
+                    <div id="custom-ext-container"></div>
+                    <button class="action-btn" style="background-color: #333; margin-top: 15px; font-size: 15px;" onclick="addCustomExt()">➕ 新增自訂外觀部位</button>
                 </div>
             </details>
 
             <details class="accordion-card">
                 <summary>3. 輪胎與輪框系統</summary>
                 <div class="accordion-content">
-                    <div class="input-group"><label>前輪胎</label><input type="text" id="tire-f" placeholder="型號與規格"></div>
-                    <div class="input-group"><label>後輪胎</label><input type="text" id="tire-r" placeholder="型號與規格"></div>
-                    <div class="input-group"><label>前輪框</label><input type="text" id="wheel-f" placeholder="廠牌/材質"></div>
+                    <div class="input-group"><label>前輪胎</label><input type="text" id="tire-f" placeholder="廠牌/型號/規格"></div>
+                    <div class="input-group"><label>前胎壓 / 胎溫</label><input type="text" id="tire-f-pt" placeholder="例: 32psi / 45°C"></div>
+                    <div class="input-group" style="margin-top: 15px;"><label>後輪胎</label><input type="text" id="tire-r" placeholder="廠牌/型號/規格"></div>
+                    <div class="input-group"><label>後胎壓 / 胎溫</label><input type="text" id="tire-r-pt" placeholder="例: 34psi / 48°C"></div>
+                    <div class="input-group" style="margin-top: 15px;"><label>前輪框</label><input type="text" id="wheel-f" placeholder="廠牌/材質"></div>
                     <div class="input-group"><label>後輪框</label><input type="text" id="wheel-r" placeholder="廠牌/材質"></div>
+                </div>
+            </details>
+
+            <details class="accordion-card">
+                <summary>4. 懸吊與阻尼硬體 (廠牌型號)</summary>
+                <div class="accordion-content">
+                    <div class="input-group"><label>前避震器</label><input type="text" id="susp-f-brand" placeholder="廠牌與型號 (例: Ohlins FGR)"></div>
+                    <div class="input-group"><label>後避震器</label><input type="text" id="susp-r-brand" placeholder="廠牌與型號 (例: Ohlins TTX)"></div>
+                    <div class="input-group"><label>前質量阻尼器</label><input type="text" id="damper-f-brand" placeholder="廠牌與型號"></div>
+                    <div class="input-group"><label>後質量阻尼器</label><input type="text" id="damper-r-brand" placeholder="廠牌與型號"></div>
                 </div>
             </details>
 
@@ -109,7 +134,7 @@
         </div>
 
 
-        <div class="section-header">懸吊系統設定 (每日紀錄)</div>
+        <div class="section-header">懸吊系統設定</div>
         <section class="card">
             <h3>前避震</h3>
             <div class="input-group inline-input">
@@ -125,7 +150,7 @@
                 <label>LSR</label><div><input type="number" id="susp-f-lsr" class="susp-num"> / 29</div>
             </div>
             <div class="input-group inline-input">
-                <label>前阻尼器</label><div style="flex:1; margin-left:15px;"><input type="text" id="susp-f-damper" placeholder="輸入廠牌型號" style="text-align: right; width: 100%; border-bottom: 1px solid var(--border-color);"></div>
+                <label>前阻尼器 (段數)</label><div><input type="number" id="susp-f-damper" class="susp-num"> / 42</div>
             </div>
 
             <h3 style="margin-top: 20px;">後避震</h3>
@@ -136,7 +161,7 @@
                 <label>R</label><div><input type="number" id="susp-r-r" class="susp-num"> / 42</div>
             </div>
             <div class="input-group inline-input">
-                <label>後阻尼器</label><div style="flex:1; margin-left:15px;"><input type="text" id="susp-r-damper" placeholder="輸入廠牌型號" style="text-align: right; width: 100%; border-bottom: 1px solid var(--border-color);"></div>
+                <label>後阻尼器 (段數)</label><div><input type="number" id="susp-r-damper" class="susp-num"> / 42</div>
             </div>
             
             <button class="action-btn susp-btn" onclick="saveSuspensionRecord()">💾 儲存為今日新設定</button>
